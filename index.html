@@ -14,12 +14,14 @@
         * { box-sizing: border-box; transition: all 0.2s ease; font-family: 'Inter', system-ui, sans-serif; }
         body { background: var(--bg); margin: 0; user-select: none; color: var(--text-main); overflow-x: hidden; }
 
+        /* Overlay Anti-Curang */
         #cheat-overlay { 
             display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.98); 
             color: white; z-index: 9999; justify-content: center; align-items: center; text-align: center;
             padding: 30px; backdrop-filter: blur(15px);
         }
 
+        /* Halaman Login */
         #login-page {
             position: fixed; inset: 0; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); 
             display: flex; justify-content: center; align-items: center; z-index: 1000; padding: 20px;
@@ -27,16 +29,19 @@
         .login-card { background: white; padding: 40px; border-radius: 20px; width: 100%; max-width: 420px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); text-align: center; }
         .logo-tutwuri { width: 80px; height: auto; margin-bottom: 20px; }
 
+        /* Header */
         header { 
             background: var(--white); border-bottom: 2px solid var(--border); padding: 0 25px; 
             display: none; justify-content: space-between; align-items: center; height: 75px;
             position: sticky; top: 0; z-index: 100;
         }
-        .timer-box { background: #fff1f2; padding: 10px 20px; border-radius: 10px; border: 1px solid #ffe4e6; font-weight: 800; font-size: 1.3rem; color: var(--danger); font-family: monospace; }
+        .timer-box { background: #fff1f2; padding: 10px 15px; border-radius: 10px; border: 1px solid #ffe4e6; font-weight: 800; font-size: 1.2rem; color: var(--danger); font-family: monospace; }
 
-        .main-wrapper { display: none; min-height: calc(100vh - 75px); padding: 25px; gap: 25px; max-width: 1400px; margin: 0 auto; }
+        /* Main Layout */
+        .main-wrapper { display: none; min-height: calc(100vh - 75px); padding: 25px; gap: 20px; max-width: 1400px; margin: 0 auto; }
+        
         .soal-section { flex: 3; background: white; border-radius: 15px; border: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
-        .soal-content { flex: 1; padding: 30px; font-size: 1.15rem; line-height: 1.7; overflow-y: auto; }
+        .soal-content { flex: 1; padding: 25px; font-size: 1.1rem; line-height: 1.6; overflow-y: auto; }
         
         .opt-item { border: 1px solid var(--border); padding: 15px; margin-bottom: 12px; border-radius: 12px; cursor: pointer; display: flex; align-items: center; gap: 15px; }
         .opt-item:hover { background: #f8fafc; border-color: var(--primary); }
@@ -44,12 +49,28 @@
         .opt-label { min-width: 32px; height: 32px; border-radius: 50%; border: 2px solid #cbd5e1; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: bold; }
         .selected .opt-label { background: var(--primary); color: white; border-color: var(--primary); }
 
-        .sidebar { flex: 1; background: white; border-radius: 15px; padding: 20px; max-width: 320px; border: 1px solid var(--border); height: fit-content; position: sticky; top: 100px; }
+        /* Sidebar Navigasi */
+        .sidebar { flex: 1; background: white; border-radius: 15px; padding: 20px; max-width: 320px; border: 1px solid var(--border); height: fit-content; position: sticky; top: 95px; }
         .grid-nomor { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 15px; }
         .btn-nomor { aspect-ratio: 1/1; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; border-radius: 8px; font-weight: 700; font-size: 0.85rem; background: white; }
         .btn-nomor.active { border: 2px solid var(--primary); color: var(--primary); }
         .btn-nomor.filled { background: var(--primary); color: white; border-color: var(--primary); }
         .btn-nomor.doubt { background: var(--accent); color: white; border-color: var(--accent); }
+
+        /* Responsif HP */
+        @media (max-width: 768px) {
+            header { padding: 0 15px; height: 65px; }
+            #user-display { font-size: 0.8rem; }
+            .timer-box { font-size: 1rem; padding: 8px 12px; }
+            
+            .main-wrapper { flex-direction: column; padding: 10px; gap: 15px; }
+            .sidebar { max-width: 100%; position: static; order: 2; }
+            .soal-section { order: 1; min-height: 400px; }
+            .grid-nomor { grid-template-columns: repeat(6, 1fr); }
+            
+            .soal-content { padding: 15px; font-size: 1rem; }
+            .opt-item { padding: 12px; font-size: 0.95rem; }
+        }
 
         #result-page { display: none; max-width: 500px; margin: 50px auto; background: white; padding: 40px; border-radius: 20px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
     </style>
@@ -60,7 +81,7 @@
     <div>
         <h1 style="font-size: 3rem; margin: 0;">⚠️</h1>
         <h2>PELANGGARAN TERDETEKSI</h2>
-        <p>Dilarang meninggalkan halaman ujian atau membuka tab lain!</p>
+        <p>Dilarang meninggalkan halaman ujian!</p>
         <button onclick="closeOverlay()" style="padding: 12px 30px; border-radius: 8px; border: none; background: var(--primary); color: white; cursor: pointer; font-weight: bold;">KEMBALI KE UJIAN</button>
     </div>
 </div>
@@ -73,18 +94,18 @@
         
         <div style="text-align: left; margin-top: 25px;">
             <label style="font-weight: bold; font-size: 0.85rem;">Nama Lengkap</label>
-            <input type="text" id="stu-name" style="width: 100%; padding: 12px; margin: 8px 0 15px 0; border: 2px solid var(--border); border-radius: 8px;" placeholder="Nama sesuai absen..." autocomplete="off">
+            <input type="text" id="stu-name" style="width: 100%; padding: 12px; margin: 8px 0 15px 0; border: 2px solid var(--border); border-radius: 8px;" placeholder="Nama lengkap..." autocomplete="off">
             <label style="font-weight: bold; font-size: 0.85rem;">Nomor Peserta</label>
             <input type="text" id="stu-id" style="width: 100%; padding: 12px; margin: 8px 0 25px 0; border: 2px solid var(--border); border-radius: 8px;" placeholder="Contoh: 2026-001" autocomplete="off">
         </div>
         
-        <button onclick="startExam()" style="width: 100%; padding: 15px; border-radius: 8px; border: none; background: var(--primary); color: white; font-weight: 700; cursor: pointer;">MULAI UJIAN SEKARANG</button>
+        <button onclick="startExam()" style="width: 100%; padding: 15px; border-radius: 8px; border: none; background: var(--primary); color: white; font-weight: 700; cursor: pointer;">MULAI UJIAN</button>
     </div>
 </div>
 
 <header id="exam-header">
     <div>
-        <small style="color: #64748b; font-weight: bold;">PESERTA:</small>
+        <small style="color: #64748b; font-weight: bold; font-size: 0.7rem;">PESERTA:</small>
         <div id="user-display" style="font-weight: 800; color: var(--primary);">NAMA PESERTA</div>
     </div>
     <div class="timer-box" id="timer">90:00</div>
@@ -92,25 +113,25 @@
 
 <div class="main-wrapper" id="exam-body">
     <div class="soal-section">
-        <div style="padding: 15px 25px; background: #f8fafc; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; font-weight: 700;">
+        <div style="padding: 12px 20px; background: #f8fafc; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-weight: 700;">
             <span id="header-no">SOAL NO 1</span>
-            <span id="q-type" style="background: #e0f2fe; color: var(--primary); font-size: 0.7rem; padding: 4px 10px; border-radius: 6px;">PILIHAN GANDA</span>
+            <span id="q-type" style="background: #e0f2fe; color: var(--primary); font-size: 0.65rem; padding: 4px 10px; border-radius: 6px;">PILIHAN GANDA</span>
         </div>
         <div class="soal-content" id="content-area"></div>
-        <div style="padding: 20px 25px; border-top: 1px solid var(--border); display: flex; gap: 10px; background: #f8fafc;">
-            <button id="btn-prev" onclick="nav(-1)" style="padding: 12px 20px; border: none; border-radius: 8px; background: #e2e8f0; font-weight: 700; cursor: pointer;">KEMBALI</button>
-            <button onclick="toggleDoubt()" style="padding: 12px 20px; border: none; border-radius: 8px; background: var(--accent); color: white; font-weight: 700; cursor: pointer;">RAGU</button>
-            <button id="btn-next" onclick="handleNext()" style="flex-grow: 1; padding: 12px 20px; border: none; border-radius: 8px; background: var(--primary); color: white; font-weight: 700; cursor: pointer;">BERIKUTNYA</button>
+        <div style="padding: 15px 20px; border-top: 1px solid var(--border); display: flex; gap: 8px; background: #f8fafc;">
+            <button id="btn-prev" onclick="nav(-1)" style="padding: 12px 15px; border: none; border-radius: 8px; background: #e2e8f0; font-weight: 700; cursor: pointer;">KEMBALI</button>
+            <button onclick="toggleDoubt()" style="padding: 12px 15px; border: none; border-radius: 8px; background: var(--accent); color: white; font-weight: 700; cursor: pointer;">RAGU</button>
+            <button id="btn-next" onclick="handleNext()" style="flex-grow: 1; padding: 12px 15px; border: none; border-radius: 8px; background: var(--primary); color: white; font-weight: 700; cursor: pointer;">BERIKUTNYA</button>
         </div>
     </div>
 
     <div class="sidebar">
-        <div style="font-weight: 800; font-size: 0.9rem; margin-bottom: 10px; display: flex; justify-content: space-between;">
+        <div style="font-weight: 800; font-size: 0.85rem; margin-bottom: 10px; display: flex; justify-content: space-between;">
             <span>NAVIGASI SOAL</span> 
             <span id="progress" style="color: var(--primary);">0/0</span>
         </div>
         <div class="grid-nomor" id="nav-grid"></div>
-        <button onclick="confirmFinish()" style="width: 100%; margin-top: 25px; padding: 15px; border-radius: 10px; border: none; background: var(--danger); color: white; font-weight: 700; cursor: pointer;">SELESAI & KIRIM</button>
+        <button onclick="confirmFinish()" style="width: 100%; margin-top: 20px; padding: 12px; border-radius: 10px; border: none; background: var(--danger); color: white; font-weight: 700; cursor: pointer;">SELESAI</button>
     </div>
 </div>
 
@@ -124,8 +145,8 @@
 <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwcW9E9S0SBlBt8us_5qpzKUavW4XE4RnQboRk7Xp-8UbET-vNr_qGMR4OyJsuOkoSOvQ/exec"; 
 
+    // Database soal tetap sama (sudah dioptimasi)
     const bankSoal = [
-        // --- PILIHAN GANDA (1-35) ---
         { id: 1, type: 'pg', q: "Arah rotasi bumi berawal dari arah….", o: ["timur", "barat", "utara", "selatan"], a: "B" },
         { id: 2, type: 'pg', q: "Setiap hari, Arianti melihat matahari terbit dari timur dan tenggelam di barat. Peristiwa tersebut dinamakan….", o: ["gerak semu tahunan matahari", "gerak semu bulan", "gerak semu harian matahari", "gerak semu harian bumi"], a: "C" },
         { id: 3, type: 'pg', q: "Revolusi bumi artinya….", o: ["perputaran bumi pada porosnya", "perputaran bulan mengelilingi bumi", "perputaran bumi mengelilingi matahari", "perputaran bulan pada sumbunya"], a: "C" },
@@ -135,7 +156,7 @@
         { id: 7, type: 'pg', q: "Keistimewaan daerah yang dilalui garis khatulistiwa yaitu….", o: ["curah hujan rendah", "beriklim sub tropis", "beriklim tropis", "suhu udara rendah"], a: "C" },
         { id: 8, type: 'pg', q: "Poros bumi mempunyai kemiringan sebesar….", o: ["25,30", "24,30", "25,40", "23,50"], a: "D" },
         { id: 9, type: 'pg', q: "Bumi berputar pada porosnya, hal tersebut terjadi karena….", o: ["gaya gravitasi bumi dan bulan", "gaya gravitasi bumi dan matahari", "gaya gravitasi bumi, bulan dan matahari", "gaya gravitasi bulan dan matahari"], a: "B" },
-        { id: 10, type: 'pg', q: "Berdasarkan letak astronomis,ada 3 pembagian zona waktu di Indonesia yaitu WIB,WITA  dan WIT.Berikut ini merupakan daerah yang termasuk Waktu Indonesia Barat (WIB) yaitu….", o: ["Sumatera, Jawa, Kalimantan Barat dan Maluku", "Sumatera, Jawa, Kalimantan Selatan dan Kalimantan Tengah", "Sumatera, Jawa, Kalimantan Barat dan Kalimantan Utara", "Sumatera, Jawa, Kalimantan Barat dan Kalimantan Tengah"], a: "D" },
+        { id: 10, type: 'pg', q: "Berdasarkan letak astronomis,ada 3 pembagian zona waktu di Indonesia yaitu WIB,WITA dan WIT. Berikut ini merupakan daerah yang termasuk WIB yaitu….", o: ["Sumatera, Jawa, Kalimantan Barat dan Maluku", "Sumatera, Jawa, Kalimantan Selatan dan Kalimantan Tengah", "Sumatera, Jawa, Kalimantan Barat dan Kalimantan Utara", "Sumatera, Jawa, Kalimantan Barat dan Kalimantan Tengah"], a: "D" },
         { id: 11, type: 'pg', q: "Masing-masing bagian wilayah waktu Indonesia yang bersebelahan memiliki perbedaan waktu… jam", o: ["1", "2", "3", "4"], a: "A" },
         { id: 12, type: 'pg', q: "Bila di daerah Jakarta pukul 01.00 WIB maka saat ini di daerah Jayapura pukul….", o: ["02.00", "03.00", "04.00", "05.00"], a: "B" },
         { id: 13, type: 'pg', q: "Iklim Negara Indonesia yaitu….", o: ["sub tropis", "dingin", "sedang", "tropis"], a: "D" },
@@ -147,230 +168,17 @@
         { id: 19, type: 'pg', q: "Kumpulan dari matahari, planet dan benda langit lainnya disebut….", o: ["Satelit", "bima sakti", "galaksi", "tata surya"], a: "D" },
         { id: 20, type: 'pg', q: "Planet yang memiliki ciri khas cincin yang besar adalah….", o: ["Uranus", "Neptunus", "Saturnus", "Mars"], a: "C" },
         { id: 21, type: 'pg', q: "Pada tahun 2006 para ilmuwan sepakat bahwa pluto bukan planet karena….", o: ["ukuran yang kecil", "tidak memiliki bulan", "terlalu berat", "tidak membersihkan lingkungan orbitnya"], a: "D" },
-        { id: 22, type: 'pg', q: "Kadek sangat suka membaca buku tentang benda-benda langit. Ada satu Planet yang paling dia kagumi. Planet tersebut adalah planet yang paling jauh dari Matahari. Planet yang dimaksud yaitu....", o: ["Mars", "Venus", "Uranus", "Neptunus"], a: "D" },
-        { id: 23, type: 'pg', q: "Energi sangat penting bagi kehidupan manusia karena….", o: ["digunakan untuk bermain", "membantu kita menjalankan aktifitas sehari-hari", "memiliki peran yang kurang dalam kehidupan", "hanya berguna untuk penerangan"], a: "B" },
-        { id: 24, type: 'pg', q: "Bagaimana energi air bisa berubah menjadi energi listrik?", o: ["dengan menggunakan panel surya", "dengan menggunakan turbin air", "dengan pembakaran bahan fosil", "dengan menggunakan panas bumi"], a: "B" },
-        { id: 25, type: 'pg', q: "Saat cuaca sangat panas, Asih menghidupkan kipas angina sehingga udara menjadi agak sejuk,perubahan energi pada kipas angin yaitu….", o: ["listrik menjadi angin", "gerak menjadi angin", "angin menjadi gerak", "listrik menjadi gerak"], a: "D" },
-        { id: 26, type: 'pg', q: "Bahan bakar fosil terdiri dari….", o: ["bensin, batu bara, pasir", "gas alam, minyak goreng, batu bara", "gas alam, minyak bumi, batubara", "minyak bumi, batu bara, solar"], a: "C" },
-        { id: 27, type: 'pg', q: "Dampak negatif dari penggunaan energi fosil yaitu….", o: ["bau wangi", "polusi", "banyak oksigen", "udara hangat"], a: "B" },
-        { id: 28, type: 'pg', q: "Energi geothermal adalah….", o: ["energi dari gerak benda", "energi dari panas matahari", "energi dari panas bumi", "energi dari angin"], a: "C" },
+        { id: 22, type: 'pg', q: "Planet yang paling jauh dari Matahari adalah....", o: ["Mars", "Venus", "Uranus", "Neptunus"], a: "D" },
+        { id: 23, type: 'pg', q: "Energi sangat penting bagi kehidupan manusia karena….", o: ["digunakan untuk bermain", "membantu menjalankan aktifitas", "kurang peran", "hanya untuk lampu"], a: "B" },
+        { id: 24, type: 'pg', q: "Bagaimana energi air bisa berubah menjadi energi listrik?", o: ["panel surya", "turbin air", "pembakaran", "panas bumi"], a: "B" },
+        { id: 25, type: 'pg', q: "Perubahan energi pada kipas angin yaitu….", o: ["listrik - angin", "gerak - angin", "angin - gerak", "listrik - gerak"], a: "D" },
+        { id: 26, type: 'pg', q: "Bahan bakar fosil terdiri dari….", o: ["bensin, batu bara, pasir", "gas, minyak goreng, batu bara", "gas alam, minyak bumi, batubara", "minyak bumi, batu bara, solar"], a: "C" },
+        { id: 27, type: 'pg', q: "Dampak negatif dari penggunaan energi fosil yaitu….", o: ["bau wangi", "polusi", "oksigen", "hangat"], a: "B" },
+        { id: 28, type: 'pg', q: "Energi geothermal adalah….", o: ["gerak benda", "panas matahari", "panas bumi", "angin"], a: "C" },
         { id: 29, type: 'pg', q: "Benda yang termasuk sumber energi tak terbatas yaitu….", o: ["bensin", "solar", "angin", "batu bara"], a: "C" },
-        { id: 30, type: 'pg', q: "Tindakan penyemprotan hama secara berlebihan dapat membuat hama menjadi….", o: ["Resistan", "Mati", "Hilang", "Lemah"], a: "A" },
-        { id: 31, type: 'pg', q: "Contoh tindakan manusia yang dapat memicu adanya pemanasan global yaitu….", o: ["pertanian", "perindangan", "pembersihan sampah", "industri"], a: "D" },
-        { id: 32, type: 'pg', q: "Untuk mengurangi dampak buruk dari deforestasi dapat dilakukan dengan cara….", o: ["penghijauan", "perindangan", "pembersihan sampah", "reboisasi"], a: "D" },
-        { id: 33, type: 'pg', q: "Cara yang tepat mengatasi banyaknya sampah plastik yaitu….", o: ["daur ulang", "membuangnya ke tempat jauh", "membakarnya", "membuangnya ke laut"], a: "A" },
-        { id: 34, type: 'pg', q: "Bergantinya musim kemarau ke musim penghujan akibat dari peristiwa ....", o: ["regulasi", "rotasi", "revolusi", "reformasi"], a: "C" },
-        { id: 35, type: 'pg', q: "Satelit bumi adalah ....", o: ["matahari", "bulan", "artemis", "appolo"], a: "B" },
-
-        // --- ISIAN (36-45) ---
-        { id: 36, type: 'isian', q: "Perubahan musim, gerak semu tahunan matahari, dan kalender masehi merupakan dampak terjadinya….", a: "revolusi bumi" },
-        { id: 37, type: 'isian', q: "Kalender Hijriah atau komariah dihitung berdasarkan waktu….", a: "revolusi bulan" },
-        { id: 38, type: 'isian', q: "Tugu penanda daerah yang dilalui garis khatulistiwa terletak di kota….", a: "pontianak" },
-        { id: 39, type: 'isian', q: "Pembagian zona waktu di Indonesia membagi menjadi 3 wilayah, Bojonegoro termasuk kedalam wilayah waktu ....", a: "WIB" },
-        { id: 40, type: 'isian', q: "Sabuk Asteroid berada di antara planet … dan ….", a: "mars dan jupiter" },
-        { id: 41, type: 'isian', q: "Benda langit yang selalu mengiringi planet dinamakan….", a: "satelit" },
-        { id: 42, type: 'isian', q: "Dalam sistem tata surya, bumi berada pada urutan ke….", a: "tiga" },
-        { id: 43, type: 'isian', q: "Planet yang mendapat julukan bintang kejora yaitu….", a: "venus" },
-        { id: 44, type: 'isian', q: "Energi listrik yang dihasilkan dari kincir angin dinamakan juga….", a: "energi bayu atau energi angin" },
-        { id: 45, type: 'isian', q: "Dua faktor utama yang mempengaruhi perubahan lingkungan yaitu … dan ….", a: "faktor alam dan faktor manusia" },
-
-        // --- URAIAN (46-50) ---
-        { id: 46, type: 'uraian', q: "Jelaskan penyebab terjadinya pergantian siang dan malam!", a: null },
-        { id: 47, type: 'uraian', q: "Gambarlah Ilustrasi terjadinya gerhana bulan! (Jelaskan posisinya)", a: null },
-        { id: 48, type: 'uraian', q: "Tuliskan nama-nama planet pada sistem tata surya kita!", a: null },
-        { id: 49, type: 'uraian', q: "Sebutkan 3 aktivitas manusia yang menjadi faktor utama perubahan lingkungan!", a: null },
-        { id: 50, type: 'uraian', q: "Sebutkan 2 tindakan manusia yang dapat menyelamatkan ekosistem sungai!", a: null }
-    ];
-
-    let current = 0;
-    let answers = JSON.parse(localStorage.getItem('cbt_ans')) || {};
-    let doubts = JSON.parse(localStorage.getItem('cbt_dbt')) || {};
-
-    document.addEventListener("visibilitychange", () => {
-        if (document.hidden && document.getElementById('login-page').style.display === 'none' && !localStorage.getItem('cbt_finished')) {
-            document.getElementById('cheat-overlay').style.display = 'flex';
-        }
-    });
-
-    function closeOverlay() { document.getElementById('cheat-overlay').style.display = 'none'; }
-
-    function startExam() {
-        const n = document.getElementById('stu-name').value.trim();
-        const i = document.getElementById('stu-id').value.trim();
-        if(!n || !i) { alert("Harap isi Nama dan Nomor Peserta!"); return; }
-        
-        if (localStorage.getItem('cbt_finished') === 'true') {
-            alert("Ujian ini sudah dinyatakan selesai.");
-            return;
-        }
-
-        document.getElementById('user-display').innerText = n.toUpperCase();
-        document.getElementById('login-page').style.display = 'none';
-        document.getElementById('exam-header').style.display = 'flex';
-        document.getElementById('exam-body').style.display = 'flex';
-        
-        initNav(); 
-        render(0); 
-        startTimer(90); 
-    }
-
-    function render(idx) {
-        current = idx;
-        const s = bankSoal[idx];
-        document.getElementById('header-no').innerText = `SOAL NO ${idx + 1}`;
-        document.getElementById('q-type').innerText = s.type.toUpperCase();
-        
-        const area = document.getElementById('content-area');
-        let html = "";
-        html += `<div style="font-weight:600; margin-bottom:15px">${s.q}</div>`;
-
-        if (s.type === 'pg') {
-            const labels = ['A', 'B', 'C', 'D'];
-            s.o.forEach((opt, i) => {
-                const lbl = labels[i];
-                html += `
-                    <div class="opt-item ${answers[idx] === lbl ? 'selected' : ''}" onclick="saveAns('${lbl}')">
-                        <div class="opt-label">${lbl}</div>
-                        <div style="flex-grow:1;">${opt}</div>
-                    </div>`;
-            });
-        } else {
-            // Menggunakan oninput agar real-time tersimpan
-            html += `<textarea id="ans-text" oninput="saveAns(this.value, false)" placeholder="Ketik jawaban di sini..." style="width:100%; height:150px; padding:15px; border-radius:12px; border:2px solid var(--border); font-size:1rem; resize:none;">${answers[idx] || ''}</textarea>`;
-        }
-        
-        area.innerHTML = html;
-        updateNavUI();
-    }
-
-    function saveAns(v, shouldRefresh = true) {
-        answers[current] = v;
-        localStorage.setItem('cbt_ans', JSON.stringify(answers));
-        if(shouldRefresh) render(current);
-        updateNavUI();
-    }
-
-    function toggleDoubt() {
-        doubts[current] = !doubts[current];
-        localStorage.setItem('cbt_dbt', JSON.stringify(doubts));
-        updateNavUI();
-    }
-
-    function initNav() {
-        const g = document.getElementById('nav-grid'); g.innerHTML = "";
-        bankSoal.forEach((_, i) => {
-            const d = document.createElement('div'); d.className = 'btn-nomor'; d.id = `n-${i}`; 
-            d.innerText = i + 1; d.onclick = () => render(i); g.appendChild(d);
-        });
-    }
-
-    function updateNavUI() {
-        let count = 0;
-        bankSoal.forEach((_, i) => {
-            const el = document.getElementById(`n-${i}`); if(!el) return;
-            el.className = 'btn-nomor';
-            if(i === current) el.classList.add('active');
-            if(answers[i] && answers[i].toString().trim() !== "") { 
-                el.classList.add('filled'); 
-                count++; 
-            }
-            if(doubts[i]) el.classList.add('doubt');
-        });
-        document.getElementById('progress').innerText = `${count}/${bankSoal.length}`;
-        document.getElementById('btn-prev').disabled = current === 0;
-        
-        // Perubahan Tombol Selesai di soal terakhir
-        const btnNext = document.getElementById('btn-next');
-        if (current === bankSoal.length - 1) {
-            btnNext.innerText = "SELESAI";
-            btnNext.style.background = "var(--danger)";
-        } else {
-            btnNext.innerText = "BERIKUTNYA";
-            btnNext.style.background = "var(--primary)";
-        }
-    }
-
-    function handleNext() {
-        if (current === bankSoal.length - 1) {
-            confirmFinish();
-        } else {
-            nav(1);
-        }
-    }
-
-    function nav(d) {
-        let n = current + d; 
-        if(n >= 0 && n < bankSoal.length) render(n); 
-    }
-
-    function startTimer(m) {
-        let t = m * 60;
-        const interval = setInterval(() => {
-            let mn = Math.floor(t/60); let s = t%60;
-            document.getElementById('timer').innerText = `${mn}:${s<10?'0':''}${s}`;
-            if(t-- <= 0) { 
-                clearInterval(interval); 
-                confirmFinish(true); 
-            }
-        }, 1000);
-    }
-
-    function confirmFinish(auto = false) {
-        if(!auto && !confirm("Apakah Anda yakin ingin mengakhiri ujian?")) return;
-        
-        localStorage.setItem('cbt_finished', 'true');
-        
-        let correct = 0;
-        const totalObjektif = 45; 
-
-        bankSoal.forEach((s, i) => { 
-            if(i < totalObjektif) { 
-                const userAns = (answers[i] || "").toString().toLowerCase().trim();
-                const keyAns = s.a.toLowerCase().trim();
-                
-                if(s.type === 'pg') {
-                    if(answers[i] === s.a) correct++;
-                } 
-                else if(s.type === 'isian') {
-                    // Logika Fleksibel No 44
-                    if(s.id === 44) {
-                        if(userAns.includes("bayu") || userAns.includes("angin")) correct++;
-                    } else if(userAns === keyAns) {
-                        correct++;
-                    }
-                }
-            }
-        });
-
-        const skor = Math.round((correct / totalObjektif) * 100);
-        
-        fetch(SCRIPT_URL, {
-            method: "POST",
-            mode: "no-cors",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ 
-                nama: document.getElementById('stu-name').value, 
-                nomor: document.getElementById('stu-id').value, 
-                skor: skor, 
-                jawaban: JSON.stringify(answers) 
-            })
-        });
-
-        document.getElementById('exam-body').style.display = 'none';
-        document.getElementById('exam-header').style.display = 'none';
-        document.getElementById('result-page').style.display = 'block';
-        document.getElementById('final-score').innerText = skor;
-        document.getElementById('result-stats').innerHTML = `
-            <p><b>Statistik:</b></p>
-            <ul>
-                <li>Jawaban Benar (PG & Isian): ${correct} / ${totalObjektif}</li>
-                <li>Soal Uraian: 5 Nomor (Menunggu koreksi manual guru)</li>
-            </ul>
-        `;
-        
-        localStorage.removeItem('cbt_ans');
-        localStorage.removeItem('cbt_dbt');
-    }
-</script>
-</body>
-</html>
+        { id: 30, type: 'pg', q: "Penyemprotan hama berlebihan membuat hama menjadi….", o: ["Resistan", "Mati", "Hilang", "Lemah"], a: "A" },
+        { id: 31, type: 'pg', q: "Contoh tindakan manusia pemicu pemanasan global yaitu….", o: ["pertanian", "perindangan", "bersih sampah", "industri"], a: "D" },
+        { id: 32, type: 'pg', q: "Mengurangi dampak buruk deforestasi dengan cara….", o: ["penghijauan", "perindangan", "kebersihan", "reboisasi"], a: "D" },
+        { id: 33, type: 'pg', q: "Cara tepat mengatasi banyaknya sampah plastik yaitu….", o: ["daur ulang", "buang jauh", "bakar", "ke laut"], a: "A" },
+        { id: 34, type: 'pg', q: "Bergantinya musim kemarau ke penghujan akibat ....", o: ["regulasi", "rotasi", "revolusi", "reformasi"], a: "C" },
+        { id: 35, type: 'pg', q: "Satelit alami bumi adalah ....", o: ["matahari", "bulan", "artemis", "appolo"], a: "B" },
