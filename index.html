@@ -11,8 +11,8 @@
             --danger: #ef4444; --success: #10b981; --border: #e2e8f0;
         }
 
-        * { box-sizing: border-box; transition: all 0.2s ease; font-family: 'Inter', system-ui, sans-serif; }
-        body { background: var(--bg); margin: 0; user-select: none; color: var(--text-main); overflow-x: hidden; }
+        * { box-sizing: border-box; transition: all 0.2s ease; font-family: 'Inter', system-ui, sans-serif; -webkit-tap-highlight-color: transparent; }
+        body { background: var(--bg); margin: 0; user-select: none; color: var(--text-main); overflow-x: hidden; touch-action: manipulation; }
 
         /* Overlay Anti-Curang */
         #cheat-overlay { 
@@ -26,53 +26,51 @@
             position: fixed; inset: 0; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); 
             display: flex; justify-content: center; align-items: center; z-index: 1000; padding: 20px;
         }
-        .login-card { background: white; padding: 40px; border-radius: 20px; width: 100%; max-width: 420px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); text-align: center; }
-        .logo-tutwuri { width: 80px; height: auto; margin-bottom: 20px; }
+        .login-card { background: white; padding: 30px; border-radius: 20px; width: 100%; max-width: 400px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); }
+        .logo-tutwuri { width: 70px; height: auto; margin-bottom: 15px; }
 
         /* Header */
         header { 
-            background: var(--white); border-bottom: 2px solid var(--border); padding: 0 25px; 
-            display: none; justify-content: space-between; align-items: center; height: 75px;
+            background: var(--white); border-bottom: 2px solid var(--border); padding: 0 20px; 
+            display: none; justify-content: space-between; align-items: center; height: 70px;
             position: sticky; top: 0; z-index: 100;
         }
-        .timer-box { background: #fff1f2; padding: 10px 15px; border-radius: 10px; border: 1px solid #ffe4e6; font-weight: 800; font-size: 1.2rem; color: var(--danger); font-family: monospace; }
+        .timer-box { background: #fff1f2; padding: 8px 12px; border-radius: 10px; border: 1px solid #ffe4e6; font-weight: 800; font-size: 1.1rem; color: var(--danger); font-family: monospace; }
 
         /* Main Layout */
-        .main-wrapper { display: none; min-height: calc(100vh - 75px); padding: 25px; gap: 20px; max-width: 1400px; margin: 0 auto; }
+        .main-wrapper { display: none; min-height: calc(100vh - 70px); padding: 20px; gap: 20px; max-width: 1200px; margin: 0 auto; }
         
-        .soal-section { flex: 3; background: white; border-radius: 15px; border: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
-        .soal-content { flex: 1; padding: 25px; font-size: 1.1rem; line-height: 1.6; overflow-y: auto; }
+        .soal-section { flex: 3; background: white; border-radius: 15px; border: 1px solid var(--border); display: flex; flex-direction: column; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+        .soal-content { flex: 1; padding: 20px; font-size: 1.1rem; line-height: 1.6; }
         
-        .opt-item { border: 1px solid var(--border); padding: 15px; margin-bottom: 12px; border-radius: 12px; cursor: pointer; display: flex; align-items: center; gap: 15px; }
-        .opt-item:hover { background: #f8fafc; border-color: var(--primary); }
+        .opt-item { border: 1px solid var(--border); padding: 14px; margin-bottom: 10px; border-radius: 12px; cursor: pointer; display: flex; align-items: center; gap: 12px; }
         .opt-item.selected { background: #eff6ff; border: 2px solid var(--primary); font-weight: 600; }
-        .opt-label { min-width: 32px; height: 32px; border-radius: 50%; border: 2px solid #cbd5e1; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: bold; }
+        .opt-label { min-width: 30px; height: 30px; border-radius: 50%; border: 2px solid #cbd5e1; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: bold; }
         .selected .opt-label { background: var(--primary); color: white; border-color: var(--primary); }
 
         /* Sidebar Navigasi */
-        .sidebar { flex: 1; background: white; border-radius: 15px; padding: 20px; max-width: 320px; border: 1px solid var(--border); height: fit-content; position: sticky; top: 95px; }
+        .sidebar { flex: 1; background: white; border-radius: 15px; padding: 20px; max-width: 300px; border: 1px solid var(--border); height: fit-content; position: sticky; top: 90px; }
         .grid-nomor { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 15px; }
-        .btn-nomor { aspect-ratio: 1/1; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; border-radius: 8px; font-weight: 700; font-size: 0.85rem; background: white; }
-        .btn-nomor.active { border: 2px solid var(--primary); color: var(--primary); }
+        .btn-nomor { aspect-ratio: 1/1; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; border-radius: 8px; font-weight: 700; font-size: 0.8rem; background: white; }
+        .btn-nomor.active { border: 2px solid var(--primary); color: var(--primary); outline: 2px solid rgba(37, 99, 235, 0.2); }
         .btn-nomor.filled { background: var(--primary); color: white; border-color: var(--primary); }
         .btn-nomor.doubt { background: var(--accent); color: white; border-color: var(--accent); }
 
         /* Responsif HP */
         @media (max-width: 768px) {
-            header { padding: 0 15px; height: 65px; }
-            #user-display { font-size: 0.8rem; }
-            .timer-box { font-size: 1rem; padding: 8px 12px; }
-            
-            .main-wrapper { flex-direction: column; padding: 10px; gap: 15px; }
-            .sidebar { max-width: 100%; position: static; order: 2; }
-            .soal-section { order: 1; min-height: 400px; }
+            header { height: 60px; padding: 0 15px; }
+            #user-display { font-size: 0.8rem; max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+            .timer-box { font-size: 1rem; }
+            .main-wrapper { flex-direction: column; padding: 10px; }
+            .sidebar { max-width: 100%; position: static; order: 2; margin-top: 10px; }
+            .soal-section { order: 1; min-height: 450px; }
             .grid-nomor { grid-template-columns: repeat(6, 1fr); }
-            
-            .soal-content { padding: 15px; font-size: 1rem; }
-            .opt-item { padding: 12px; font-size: 0.95rem; }
+            .opt-item { padding: 12px; font-size: 1rem; }
         }
 
-        #result-page { display: none; max-width: 500px; margin: 50px auto; background: white; padding: 40px; border-radius: 20px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+        #result-page { display: none; max-width: 500px; margin: 40px auto; background: white; padding: 40px; border-radius: 20px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        textarea { width: 100%; height: 120px; padding: 12px; border-radius: 10px; border: 2px solid var(--border); font-size: 1rem; resize: none; }
+        textarea:focus { outline: none; border-color: var(--primary); }
     </style>
 </head>
 <body oncontextmenu="return false;" oncopy="return false;" oncut="return false;">
@@ -81,31 +79,31 @@
     <div>
         <h1 style="font-size: 3rem; margin: 0;">⚠️</h1>
         <h2>PELANGGARAN TERDETEKSI</h2>
-        <p>Dilarang meninggalkan halaman ujian!</p>
-        <button onclick="closeOverlay()" style="padding: 12px 30px; border-radius: 8px; border: none; background: var(--primary); color: white; cursor: pointer; font-weight: bold;">KEMBALI KE UJIAN</button>
+        <p>Jangan keluar dari aplikasi atau membuka notifikasi!</p>
+        <button type="button" onclick="closeOverlay()" style="padding: 12px 30px; border-radius: 8px; border: none; background: var(--primary); color: white; cursor: pointer; font-weight: bold;">SAYA MENGERTI</button>
     </div>
 </div>
 
 <div id="login-page">
     <div class="login-card">
         <img src="https://awsimages.detik.net.id/community/media/visual/2023/05/02/lambang-tut-wuri-handayani.png?w=700&q=90" class="logo-tutwuri" alt="Logo">
-        <h1 style="color: var(--primary); margin: 0; font-size: 1.5rem;">ASAT IPAS 2026</h1>
-        <p style="margin-top: 5px; font-weight: 600; color: #64748b;">SD NEGERI NGASEM I</p>
+        <h2 style="color: var(--primary); margin: 0;">ASAT IPAS 2026</h2>
+        <p style="margin-top: 5px; color: #64748b; font-size: 0.9rem;">SD NEGERI NGASEM I</p>
         
-        <div style="text-align: left; margin-top: 25px;">
-            <label style="font-weight: bold; font-size: 0.85rem;">Nama Lengkap</label>
-            <input type="text" id="stu-name" style="width: 100%; padding: 12px; margin: 8px 0 15px 0; border: 2px solid var(--border); border-radius: 8px;" placeholder="Nama lengkap..." autocomplete="off">
-            <label style="font-weight: bold; font-size: 0.85rem;">Nomor Peserta</label>
-            <input type="text" id="stu-id" style="width: 100%; padding: 12px; margin: 8px 0 25px 0; border: 2px solid var(--border); border-radius: 8px;" placeholder="Contoh: 2026-001" autocomplete="off">
+        <div style="text-align: left; margin-top: 20px;">
+            <label style="font-weight: bold; font-size: 0.8rem;">Nama Lengkap</label>
+            <input type="text" id="stu-name" style="width: 100%; padding: 12px; margin: 5px 0 15px 0; border: 2px solid var(--border); border-radius: 8px; font-size: 1rem;" placeholder="Nama sesuai absen..." autocomplete="off">
+            <label style="font-weight: bold; font-size: 0.8rem;">Nomor Peserta</label>
+            <input type="text" id="stu-id" style="width: 100%; padding: 12px; margin: 5px 0 20px 0; border: 2px solid var(--border); border-radius: 8px; font-size: 1rem;" placeholder="Contoh: 01-001" autocomplete="off">
         </div>
         
-        <button onclick="startExam()" style="width: 100%; padding: 15px; border-radius: 8px; border: none; background: var(--primary); color: white; font-weight: 700; cursor: pointer;">MULAI UJIAN</button>
+        <button type="button" onclick="startExam()" style="width: 100%; padding: 15px; border-radius: 10px; border: none; background: var(--primary); color: white; font-weight: 700; cursor: pointer; font-size: 1rem;">MASUK UJIAN</button>
     </div>
 </div>
 
 <header id="exam-header">
     <div>
-        <small style="color: #64748b; font-weight: bold; font-size: 0.7rem;">PESERTA:</small>
+        <small style="color: #64748b; font-weight: bold; font-size: 0.65rem;">PESERTA</small>
         <div id="user-display" style="font-weight: 800; color: var(--primary);">NAMA PESERTA</div>
     </div>
     <div class="timer-box" id="timer">90:00</div>
@@ -113,40 +111,41 @@
 
 <div class="main-wrapper" id="exam-body">
     <div class="soal-section">
-        <div style="padding: 12px 20px; background: #f8fafc; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-weight: 700;">
-            <span id="header-no">SOAL NO 1</span>
-            <span id="q-type" style="background: #e0f2fe; color: var(--primary); font-size: 0.65rem; padding: 4px 10px; border-radius: 6px;">PILIHAN GANDA</span>
+        <div style="padding: 12px 20px; background: #f8fafc; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
+            <span id="header-no" style="font-weight: 800;">SOAL NO 1</span>
+            <span id="q-type" style="background: #e0f2fe; color: var(--primary); font-size: 0.7rem; padding: 4px 10px; border-radius: 6px; font-weight: bold;">PILIHAN GANDA</span>
         </div>
         <div class="soal-content" id="content-area"></div>
         <div style="padding: 15px 20px; border-top: 1px solid var(--border); display: flex; gap: 8px; background: #f8fafc;">
-            <button id="btn-prev" onclick="nav(-1)" style="padding: 12px 15px; border: none; border-radius: 8px; background: #e2e8f0; font-weight: 700; cursor: pointer;">KEMBALI</button>
-            <button onclick="toggleDoubt()" style="padding: 12px 15px; border: none; border-radius: 8px; background: var(--accent); color: white; font-weight: 700; cursor: pointer;">RAGU</button>
-            <button id="btn-next" onclick="handleNext()" style="flex-grow: 1; padding: 12px 15px; border: none; border-radius: 8px; background: var(--primary); color: white; font-weight: 700; cursor: pointer;">BERIKUTNYA</button>
+            <button type="button" id="btn-prev" onclick="nav(-1)" style="padding: 12px; border: none; border-radius: 8px; background: #e2e8f0; font-weight: 700; cursor: pointer; min-width: 80px;">KEMBALI</button>
+            <button type="button" onclick="toggleDoubt()" style="padding: 12px; border: none; border-radius: 8px; background: var(--accent); color: white; font-weight: 700; cursor: pointer;">RAGU</button>
+            <button type="button" id="btn-next" onclick="handleNext()" style="flex-grow: 1; padding: 12px; border: none; border-radius: 8px; background: var(--primary); color: white; font-weight: 700; cursor: pointer;">SELANJUTNYA</button>
         </div>
     </div>
 
     <div class="sidebar">
-        <div style="font-weight: 800; font-size: 0.85rem; margin-bottom: 10px; display: flex; justify-content: space-between;">
-            <span>NAVIGASI SOAL</span> 
-            <span id="progress" style="color: var(--primary);">0/0</span>
+        <div style="font-weight: 800; font-size: 0.8rem; margin-bottom: 10px; display: flex; justify-content: space-between;">
+            <span>NAVIGASI</span> 
+            <span id="progress" style="color: var(--primary);">0/50</span>
         </div>
         <div class="grid-nomor" id="nav-grid"></div>
-        <button onclick="confirmFinish()" style="width: 100%; margin-top: 20px; padding: 12px; border-radius: 10px; border: none; background: var(--danger); color: white; font-weight: 700; cursor: pointer;">SELESAI</button>
+        <button type="button" onclick="confirmFinish()" style="width: 100%; margin-top: 20px; padding: 12px; border-radius: 10px; border: none; background: var(--danger); color: white; font-weight: 700; cursor: pointer;">KIRIM JAWABAN</button>
     </div>
 </div>
 
 <div id="result-page">
-    <h2 style="color: var(--primary);">UJIAN SELESAI</h2>
-    <div style="font-size: 4rem; font-weight: 900; color: var(--success); margin: 20px 0;" id="final-score">0</div>
-    <div id="result-stats" style="text-align: left; background: #f8fafc; padding: 20px; border-radius: 12px; margin-bottom: 25px; border: 1px solid var(--border);"></div>
-    <button onclick="location.reload()" style="width: 100%; padding: 14px; border-radius: 10px; border: none; background: var(--primary); color: white; cursor: pointer; font-weight: bold;">KELUAR</button>
+    <h2 style="color: var(--primary);">TERIMA KASIH</h2>
+    <p>Jawaban Anda telah berhasil dikirim.</p>
+    <div style="font-size: 4rem; font-weight: 900; color: var(--success); margin: 15px 0;" id="final-score">0</div>
+    <div id="result-stats" style="background: #f8fafc; padding: 15px; border-radius: 12px; margin-bottom: 20px; font-size: 0.9rem;"></div>
+    <button type="button" onclick="location.reload()" style="width: 100%; padding: 14px; border-radius: 10px; border: none; background: var(--primary); color: white; cursor: pointer; font-weight: bold;">KEMBALI KE BERANDA</button>
 </div>
 
 <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwcW9E9S0SBlBt8us_5qpzKUavW4XE4RnQboRk7Xp-8UbET-vNr_qGMR4OyJsuOkoSOvQ/exec"; 
+    const SCRIPT_URL = "URL_APPS_SCRIPT_ANDA"; 
 
-    // Database soal tetap sama (sudah dioptimasi)
     const bankSoal = [
+        // ... (data soal sama seperti sebelumnya) ...
         { id: 1, type: 'pg', q: "Arah rotasi bumi berawal dari arah….", o: ["timur", "barat", "utara", "selatan"], a: "B" },
         { id: 2, type: 'pg', q: "Setiap hari, Arianti melihat matahari terbit dari timur dan tenggelam di barat. Peristiwa tersebut dinamakan….", o: ["gerak semu tahunan matahari", "gerak semu bulan", "gerak semu harian matahari", "gerak semu harian bumi"], a: "C" },
         { id: 3, type: 'pg', q: "Revolusi bumi artinya….", o: ["perputaran bumi pada porosnya", "perputaran bulan mengelilingi bumi", "perputaran bumi mengelilingi matahari", "perputaran bulan pada sumbunya"], a: "C" },
@@ -182,7 +181,6 @@
         { id: 33, type: 'pg', q: "Cara tepat mengatasi banyaknya sampah plastik yaitu….", o: ["daur ulang", "buang jauh", "bakar", "ke laut"], a: "A" },
         { id: 34, type: 'pg', q: "Bergantinya musim kemarau ke penghujan akibat ....", o: ["regulasi", "rotasi", "revolusi", "reformasi"], a: "C" },
         { id: 35, type: 'pg', q: "Satelit alami bumi adalah ....", o: ["matahari", "bulan", "artemis", "appolo"], a: "B" },
-
         { id: 36, type: 'isian', q: "Perubahan musim merupakan dampak terjadinya….", a: "revolusi bumi" },
         { id: 37, type: 'isian', q: "Kalender Hijriah dihitung berdasarkan waktu….", a: "revolusi bulan" },
         { id: 38, type: 'isian', q: "Tugu Khatulistiwa terletak di kota….", a: "pontianak" },
@@ -193,7 +191,6 @@
         { id: 43, type: 'isian', q: "Planet 'Bintang Kejora' adalah….", a: "venus" },
         { id: 44, type: 'isian', q: "Energi listrik dari kincir angin disebut energi….", a: "bayu" },
         { id: 45, type: 'isian', q: "Faktor utama perubahan lingkungan adalah faktor alam dan faktor….", a: "manusia" },
-
         { id: 46, type: 'uraian', q: "Jelaskan penyebab terjadinya pergantian siang dan malam!", a: null },
         { id: 47, type: 'uraian', q: "Jelaskan posisi Matahari, Bumi, dan Bulan saat terjadi Gerhana Bulan!", a: null },
         { id: 48, type: 'uraian', q: "Tuliskan nama-nama planet secara berurutan!", a: null },
@@ -205,7 +202,6 @@
     let answers = JSON.parse(localStorage.getItem('cbt_ans')) || {};
     let doubts = JSON.parse(localStorage.getItem('cbt_dbt')) || {};
 
-    // Deteksi Tab Switching (Anti-Cheat)
     document.addEventListener("visibilitychange", () => {
         if (document.hidden && !localStorage.getItem('cbt_finished')) {
             document.getElementById('cheat-overlay').style.display = 'flex';
@@ -217,16 +213,14 @@
     function startExam() {
         const n = document.getElementById('stu-name').value.trim();
         const i = document.getElementById('stu-id').value.trim();
-        if(!n || !i) { alert("Isi Nama & Nomor!"); return; }
+        if(!n || !i) { alert("Lengkapi Nama dan Nomor Peserta!"); return; }
         
         document.getElementById('user-display').innerText = n.toUpperCase();
         document.getElementById('login-page').style.display = 'none';
         document.getElementById('exam-header').style.display = 'flex';
         document.getElementById('exam-body').style.display = 'flex';
         
-        initNav(); 
-        render(0); 
-        startTimer(90); 
+        initNav(); render(0); startTimer(90); 
     }
 
     function render(idx) {
@@ -236,7 +230,7 @@
         document.getElementById('q-type').innerText = s.type.toUpperCase();
         
         const area = document.getElementById('content-area');
-        let html = `<div style="font-weight:600; margin-bottom:15px">${s.q}</div>`;
+        let html = `<div style="font-weight:600; margin-bottom:15px; color:#334155;">${s.q}</div>`;
 
         if (s.type === 'pg') {
             const labels = ['A', 'B', 'C', 'D'];
@@ -249,10 +243,16 @@
                     </div>`;
             });
         } else {
-            html += `<textarea id="ans-text" oninput="saveAns(this.value, false)" placeholder="Tulis jawaban..." style="width:100%; height:120px; padding:12px; border-radius:10px; border:2px solid var(--border);">${answers[idx] || ''}</textarea>`;
+            // Ditambahkan autocapitalize="none" dan spellcheck="false" agar input HP lebih stabil
+            html += `<textarea id="ans-text" oninput="saveAns(this.value, false)" 
+                    placeholder="Tulis jawaban Anda di sini..." 
+                    autocapitalize="none" 
+                    spellcheck="false"
+                    >${answers[idx] || ''}</textarea>`;
         }
         area.innerHTML = html;
         updateNavUI();
+        window.scrollTo(0,0);
     }
 
     function saveAns(v, refresh = true) {
@@ -282,11 +282,11 @@
             const el = document.getElementById(`n-${i}`); if(!el) return;
             el.className = 'btn-nomor';
             if(i === current) el.classList.add('active');
-            if(answers[i] && answers[i].trim() !== "") { el.classList.add('filled'); count++; }
+            if(answers[i] && answers[i].toString().trim() !== "") { el.classList.add('filled'); count++; }
             if(doubts[i]) el.classList.add('doubt');
         });
         document.getElementById('progress').innerText = `${count}/${bankSoal.length}`;
-        document.getElementById('btn-prev').disabled = current === 0;
+        document.getElementById('btn-prev').style.visibility = current === 0 ? 'hidden' : 'visible';
     }
 
     function handleNext() {
@@ -302,6 +302,7 @@
     function startTimer(m) {
         let t = m * 60;
         const iv = setInterval(() => {
+            if(localStorage.getItem('cbt_finished')) { clearInterval(iv); return; }
             let mn = Math.floor(t/60); let s = t%60;
             document.getElementById('timer').innerText = `${mn}:${s<10?'0':''}${s}`;
             if(t-- <= 0) { clearInterval(iv); confirmFinish(true); }
@@ -309,15 +310,15 @@
     }
 
     function confirmFinish(auto = false) {
-        if(!auto && !confirm("Kirim jawaban sekarang?")) return;
+        if(!auto && !confirm("Yakin ingin menyelesaikan ujian?")) return;
         
         localStorage.setItem('cbt_finished', 'true');
         let correct = 0;
         bankSoal.forEach((s, i) => { 
-            if(i < 45) {
+            if(i < 45) { // Hanya PG dan Isian
                 const u = (answers[i] || "").toString().toLowerCase().trim();
                 if(s.type === 'pg' && u === s.a.toLowerCase()) correct++;
-                else if(s.type === 'isian' && u.includes(s.a.toLowerCase())) correct++;
+                else if(s.type === 'isian' && u === s.a.toLowerCase()) correct++;
             }
         });
 
@@ -326,13 +327,20 @@
         document.getElementById('exam-header').style.display = 'none';
         document.getElementById('result-page').style.display = 'block';
         document.getElementById('final-score').innerText = skor;
-        document.getElementById('result-stats').innerHTML = `Selesai! Skor PG & Isian: ${correct}/45. Uraian akan dikoreksi guru.`;
+        document.getElementById('result-stats').innerHTML = `Benar: ${correct} dari 45 soal (PG & Isian).<br>Uraian akan diperiksa oleh guru secara manual.`;
         
-        // Kirim ke Google Sheets
-        fetch(SCRIPT_URL, {
-            method: "POST", mode: "no-cors",
-            body: JSON.stringify({ nama: document.getElementById('stu-name').value, skor: skor, jawaban: answers })
-        });
+        // Opsional: Kirim ke Google Sheets
+        if(SCRIPT_URL !== "URL_APPS_SCRIPT_ANDA") {
+            fetch(SCRIPT_URL, {
+                method: "POST", mode: "no-cors",
+                body: JSON.stringify({ 
+                    nama: document.getElementById('stu-name').value, 
+                    id: document.getElementById('stu-id').value,
+                    skor: skor, 
+                    jawaban: answers 
+                })
+            });
+        }
     }
 </script>
 </body>
