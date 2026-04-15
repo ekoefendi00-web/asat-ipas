@@ -182,3 +182,158 @@
         { id: 33, type: 'pg', q: "Cara tepat mengatasi banyaknya sampah plastik yaitu….", o: ["daur ulang", "buang jauh", "bakar", "ke laut"], a: "A" },
         { id: 34, type: 'pg', q: "Bergantinya musim kemarau ke penghujan akibat ....", o: ["regulasi", "rotasi", "revolusi", "reformasi"], a: "C" },
         { id: 35, type: 'pg', q: "Satelit alami bumi adalah ....", o: ["matahari", "bulan", "artemis", "appolo"], a: "B" },
+
+        { id: 36, type: 'isian', q: "Perubahan musim merupakan dampak terjadinya….", a: "revolusi bumi" },
+        { id: 37, type: 'isian', q: "Kalender Hijriah dihitung berdasarkan waktu….", a: "revolusi bulan" },
+        { id: 38, type: 'isian', q: "Tugu Khatulistiwa terletak di kota….", a: "pontianak" },
+        { id: 39, type: 'isian', q: "Bojonegoro termasuk wilayah waktu ....", a: "WIB" },
+        { id: 40, type: 'isian', q: "Sabuk Asteroid berada di antara planet … dan ….", a: "mars dan jupiter" },
+        { id: 41, type: 'isian', q: "Benda langit pengiring planet dinamakan….", a: "satelit" },
+        { id: 42, type: 'isian', q: "Urutan Bumi dalam tata surya adalah ke….", a: "tiga" },
+        { id: 43, type: 'isian', q: "Planet 'Bintang Kejora' adalah….", a: "venus" },
+        { id: 44, type: 'isian', q: "Energi listrik dari kincir angin disebut energi….", a: "bayu" },
+        { id: 45, type: 'isian', q: "Faktor utama perubahan lingkungan adalah faktor alam dan faktor….", a: "manusia" },
+
+        { id: 46, type: 'uraian', q: "Jelaskan penyebab terjadinya pergantian siang dan malam!", a: null },
+        { id: 47, type: 'uraian', q: "Jelaskan posisi Matahari, Bumi, dan Bulan saat terjadi Gerhana Bulan!", a: null },
+        { id: 48, type: 'uraian', q: "Tuliskan nama-nama planet secara berurutan!", a: null },
+        { id: 49, type: 'uraian', q: "Sebutkan 3 aktivitas manusia yang merusak lingkungan!", a: null },
+        { id: 50, type: 'uraian', q: "Sebutkan 2 cara menyelamatkan ekosistem sungai!", a: null }
+    ];
+
+    let current = 0;
+    let answers = JSON.parse(localStorage.getItem('cbt_ans')) || {};
+    let doubts = JSON.parse(localStorage.getItem('cbt_dbt')) || {};
+
+    // Deteksi Tab Switching (Anti-Cheat)
+    document.addEventListener("visibilitychange", () => {
+        if (document.hidden && !localStorage.getItem('cbt_finished')) {
+            document.getElementById('cheat-overlay').style.display = 'flex';
+        }
+    });
+
+    function closeOverlay() { document.getElementById('cheat-overlay').style.display = 'none'; }
+
+    function startExam() {
+        const n = document.getElementById('stu-name').value.trim();
+        const i = document.getElementById('stu-id').value.trim();
+        if(!n || !i) { alert("Isi Nama & Nomor!"); return; }
+        
+        document.getElementById('user-display').innerText = n.toUpperCase();
+        document.getElementById('login-page').style.display = 'none';
+        document.getElementById('exam-header').style.display = 'flex';
+        document.getElementById('exam-body').style.display = 'flex';
+        
+        initNav(); 
+        render(0); 
+        startTimer(90); 
+    }
+
+    function render(idx) {
+        current = idx;
+        const s = bankSoal[idx];
+        document.getElementById('header-no').innerText = `SOAL NO ${idx + 1}`;
+        document.getElementById('q-type').innerText = s.type.toUpperCase();
+        
+        const area = document.getElementById('content-area');
+        let html = `<div style="font-weight:600; margin-bottom:15px">${s.q}</div>`;
+
+        if (s.type === 'pg') {
+            const labels = ['A', 'B', 'C', 'D'];
+            s.o.forEach((opt, i) => {
+                const lbl = labels[i];
+                html += `
+                    <div class="opt-item ${answers[idx] === lbl ? 'selected' : ''}" onclick="saveAns('${lbl}')">
+                        <div class="opt-label">${lbl}</div>
+                        <div style="flex-grow:1;">${opt}</div>
+                    </div>`;
+            });
+        } else {
+            html += `<textarea id="ans-text" oninput="saveAns(this.value, false)" placeholder="Tulis jawaban..." style="width:100%; height:120px; padding:12px; border-radius:10px; border:2px solid var(--border);">${answers[idx] || ''}</textarea>`;
+        }
+        area.innerHTML = html;
+        updateNavUI();
+    }
+
+    function saveAns(v, refresh = true) {
+        answers[current] = v;
+        localStorage.setItem('cbt_ans', JSON.stringify(answers));
+        if(refresh) render(current);
+        updateNavUI();
+    }
+
+    function toggleDoubt() {
+        doubts[current] = !doubts[current];
+        localStorage.setItem('cbt_dbt', JSON.stringify(doubts));
+        updateNavUI();
+    }
+
+    function initNav() {
+        const g = document.getElementById('nav-grid'); g.innerHTML = "";
+        bankSoal.forEach((_, i) => {
+            const d = document.createElement('div'); d.className = 'btn-nomor'; d.id = `n-${i}`; 
+            d.innerText = i + 1; d.onclick = () => render(i); g.appendChild(d);
+        });
+    }
+
+    function updateNavUI() {
+        let count = 0;
+        bankSoal.forEach((_, i) => {
+            const el = document.getElementById(`n-${i}`); if(!el) return;
+            el.className = 'btn-nomor';
+            if(i === current) el.classList.add('active');
+            if(answers[i] && answers[i].trim() !== "") { el.classList.add('filled'); count++; }
+            if(doubts[i]) el.classList.add('doubt');
+        });
+        document.getElementById('progress').innerText = `${count}/${bankSoal.length}`;
+        document.getElementById('btn-prev').disabled = current === 0;
+    }
+
+    function handleNext() {
+        if (current === bankSoal.length - 1) confirmFinish();
+        else nav(1);
+    }
+
+    function nav(d) {
+        let n = current + d; 
+        if(n >= 0 && n < bankSoal.length) render(n); 
+    }
+
+    function startTimer(m) {
+        let t = m * 60;
+        const iv = setInterval(() => {
+            let mn = Math.floor(t/60); let s = t%60;
+            document.getElementById('timer').innerText = `${mn}:${s<10?'0':''}${s}`;
+            if(t-- <= 0) { clearInterval(iv); confirmFinish(true); }
+        }, 1000);
+    }
+
+    function confirmFinish(auto = false) {
+        if(!auto && !confirm("Kirim jawaban sekarang?")) return;
+        
+        localStorage.setItem('cbt_finished', 'true');
+        let correct = 0;
+        bankSoal.forEach((s, i) => { 
+            if(i < 45) {
+                const u = (answers[i] || "").toString().toLowerCase().trim();
+                if(s.type === 'pg' && u === s.a.toLowerCase()) correct++;
+                else if(s.type === 'isian' && u.includes(s.a.toLowerCase())) correct++;
+            }
+        });
+
+        const skor = Math.round((correct / 45) * 100);
+        document.getElementById('exam-body').style.display = 'none';
+        document.getElementById('exam-header').style.display = 'none';
+        document.getElementById('result-page').style.display = 'block';
+        document.getElementById('final-score').innerText = skor;
+        document.getElementById('result-stats').innerHTML = `Selesai! Skor PG & Isian: ${correct}/45. Uraian akan dikoreksi guru.`;
+        
+        // Kirim ke Google Sheets
+        fetch(SCRIPT_URL, {
+            method: "POST", mode: "no-cors",
+            body: JSON.stringify({ nama: document.getElementById('stu-name').value, skor: skor, jawaban: answers })
+        });
+    }
+</script>
+</body>
+</html>
